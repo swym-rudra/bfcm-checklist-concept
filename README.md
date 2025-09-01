@@ -5,12 +5,9 @@ A comprehensive Black Friday Cyber Monday (BFCM) checklist system built with Nod
 ## 🚀 Features
 
 - **Email Templates**: Pre-built templates for various BFCM scenarios
-- **PDF Generation**: Automated PDF creation for marketing materials
 - **Web Scraping**: Data collection and analysis tools
 - **Server Management**: Express.js server for template serving
-- **Image Processing**: Sharp integration for image optimization
-- **Browser Automation**: Puppeteer for dynamic content generation
-
+  
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
@@ -47,8 +44,8 @@ touch .env
 Add your environment variables (example):
 
 ```env
-# Google AI API Key (if using generative AI features)
 GOOGLE_AI_API_KEY=your_api_key_here
+PERPLEXITY_API_KEY=your_API_KEY
 
 # Server Configuration
 PORT=3000
@@ -67,20 +64,7 @@ node server.js
 
 The server will start on `http://localhost:3000` (or the port specified in your `.env` file).
 
-### Alternative Scripts
-
-```bash
-# Run with nodemon for development (auto-restart on file changes)
-npm run dev
-
-# Run specific components
-node scraper.js
-node perp.js
-node s2.js
-```
-
 ## 📁 Project Structure
-
 ```
 bfcm-checklist-concept/
 ├── templates/                 # HTML email templates
