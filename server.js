@@ -8,7 +8,7 @@ import fetch from 'node-fetch';
 // --- Configuration ---
 // IMPORTANT: Replace with your actual API keys.
 const PERPLEXITY_API_KEY = ""; // 👈 PASTE YOUR PERPLEXITY KEY HERE
-const GEMINI_API_KEY = "AIzaSyCvl6HPx71KVoO1PRWuCvAyHF83VX6gLWE";       // 👈 PASTE YOUR GEMINI KEY HERE
+const GEMINI_API_KEY = "";       // 👈 PASTE YOUR GEMINI KEY HERE
 
 // Initialize the Express server
 const app = express();
