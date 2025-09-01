@@ -1,0 +1,34 @@
+# Node.js Dependencies for BFCM Checklist Project
+# This file lists all required packages and their versions
+
+# Google Generative AI for AI-powered features
+@google/generative-ai@^0.24.1
+
+# HTTP client for making requests
+axios@^1.11.0
+
+# HTML parsing and manipulation (jQuery-like API)
+cheerio@^1.1.2
+
+# Environment variable management
+dotenv@^17.2.1
+
+# Web application framework
+express@^5.1.0
+
+# Fetch API for Node.js
+node-fetch@^3.3.2
+
+# PDF manipulation and merging
+pdf-merger-js@^5.1.2
+
+# Headless browser automation
+puppeteer@^24.17.0
+
+# Image processing and optimization
+sharp@^0.34.3
+
+# Note: This is a Node.js project. Install dependencies using:
+# npm install
+# or
+# yarn install
