@@ -62,12 +62,6 @@ NODE_ENV=development
 ### Start the Server
 
 ```bash
-npm start
-```
-
-Or if you prefer to run directly:
-
-```bash
 node server.js
 ```
 
