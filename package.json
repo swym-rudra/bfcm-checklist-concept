@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.11.0",
+    "cheerio": "^1.1.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "pdf-merger-js": "^5.1.2",
+    "puppeteer": "^24.17.0",
+    "sharp": "^0.34.3"
+  }
+}

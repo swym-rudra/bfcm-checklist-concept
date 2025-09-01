@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html style="margin: 0; padding: 0; font-family: 'Work Sans', Helvetica, Arial, sans-serif; font-size: 14px;">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        color: #141414;
+      }
+      .container {
+        max-width: 700px;
+        margin: 20px auto;
+        padding: 20px 20px;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .header {
+        color: #757575;
+        line-height: 21px;
+        font-size: 14px;
+      }
+      .headline {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 32px;
+        margin: 10px 0;
+        text-align: center;
+      }
+      .product-image-wrapper {
+        text-align: center;
+        margin: 10px 0;
+      }
+      .product-image-wrapper img {
+        width: 100%;
+        max-width: 400px;
+        height: 90%;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+      }
+      .product-title {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        margin: 10px 0 10px;
+      }
+      .product-prices {
+        font-size: 18px;
+        color: #757575;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .product-description {
+        font-size: 16px;
+        color: #757575;
+        text-align: center;
+        line-height: 24px;
+        margin-bottom: 10px;
+      }
+      .cta-button {
+        display: inline-block;
+        background-color: #000000;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 14px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .footer-buttons {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+      .footer-button {
+        background-color: #f2f2f2;
+        color: #141414;
+        padding: 12px 12px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+       
+      <div class="header">To: {{to_email}}</div>
+    <div class="header">From: {{from_email}}</div>
+
+    <div style="margin: 20px 0; font-size: 12px; font-weight: 400; line-height: 28px; text-align: left;">
+        {{priceDrop_greeting}}
+    </div>
+
+    <div class="headline">{{headline}}</div>
+
+
+      <div class="product-image-wrapper">
+        <img src="{{product_image}}" alt="{{product_name}}" />
+      </div>
+
+      <div class="product-title">{{product_name}}</div>
+      <div class="product-prices">
+        <s>{{priceDrop_originalPriceLabel}}: ${{product_price}}</s><br />
+        <b>{{priceDrop_newPriceLabel}}: ${{new_price}}</b>
+      </div>
+      <div class="product-description">
+        {{product_message}}
+      </div>
+      <div style="text-align: center;">
+        <a href="{{product_link}}" class="cta-button">{{priceDrop_buyNowButton}}</a>
+      </div>
+
+      <div class="footer-buttons">
+        <div class="footer-button">{{priceDrop_replyButton}}</div>
+        <div class="footer-button">{{priceDrop_forwardButton}}</div>
+      </div>
+    </div>
+  </body>
+</html>

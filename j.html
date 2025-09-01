@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Season Readiness Checklist</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --primary-color: #4F46E5; --primary-hover: #4338CA; --text-color: #374151; --text-light: #6B7280; --border-color: #E5E7EB; --background-light: #F9FAFB; --background-white: #FFFFFF; --success-color: #10B981; --error-color: #EF4444; --font-family: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-family); background-color: var(--background-light); color: var(--text-color); margin: 0; padding: 2rem; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .card { background-color: var(--background-white); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        h1 { font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+        h2 { font-size: 1.5rem; font-weight: 600; margin-top: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+        .input-group { display: flex; gap: 1rem; align-items: center; }
+        .input-group input[type="text"] { flex-grow: 1; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .input-group input[type="text"]:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s, opacity 0.2s; white-space: nowrap; }
+        .btn:disabled { background-color: #9CA3AF; cursor: not-allowed; opacity: 0.7; }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-primary:hover:not(:disabled) { background-color: var(--primary-hover); }
+        .checklist-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+        .checklist-table td { padding: 1rem 0.5rem; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+        .checklist-table tr:last-child td { border-bottom: none; }
+        .checklist-table td:first-child { font-weight: 500; width: 40%; }
+        .checklist-table td:nth-child(2) { color: var(--text-light); }
+        .seasons-table td:nth-child(2) { font-style: normal; color: var(--text-color); }
+        .placeholder-text { color: #9CA3AF; font-style: italic; }
+        .status-message { text-align: center; padding: 1rem; font-weight: 500; color: var(--text-light); display: none; }
+        .checklist-table pre { background-color: var(--background-light); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); white-space: pre-wrap; word-wrap: break-word; font-family: monospace; font-size: 0.9rem; line-height: 1.6; color: var(--text-color); margin: 0; }
+        .integration-card h2 { border-bottom: none; margin-bottom: 0.5rem; }
+        .integration-card p { margin-top: 0; line-height: 1.6; color: var(--text-light); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Season Readiness Checklist!</h1>
+        <div class="card">
+            <div class="input-group">
+                <input type="text" id="storeUrl" placeholder="Enter store URL (e.g., nala.ro)">
+                <button class="btn btn-primary" id="simulateBtn">Simulate for My Store</button>
+            </div>
+            <div id="status" class="status-message"></div>
+        </div>
+        <div class="card">
+            <h2>Festive Seasons</h2>
+            <table class="checklist-table seasons-table" id="festivals-table">
+                <tbody>
+                    <tr><td colspan="2" class="placeholder-text">Enter a URL and click simulate to see relevant festive seasons.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h2>Marketing with Wishlist</h2>
+            <table class="checklist-table">
+                 <tbody>
+                    <tr>
+                        <td>Send Wishlist Reminders</td>
+                        <td id="template-reminder"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send reminders for cart abandoned items</td>
+                        <td id="template-abandoned"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts for price drop</td>
+                        <td id="template-price-drop"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts when a product is back in stock</td>
+                        <td id="template-back-in-stock"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts when a product is low in stock</td>
+                        <td id="template-low-stock"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h2>Use Wishlist Like The Professionals</h2>
+            <table class="checklist-table">
+                 <tbody>
+                    <tr>
+                        <td>Run a "Win Your Wishlist" campaign</td>
+                        <td id="template-campaign"><p class="placeholder-text">Simulated campaign copy will appear here.</p></td>
+                    </tr>
+                 </tbody>
+            </table>
+        </div>
+        
+        <!-- NEW SECTION ADDED HERE -->
+        <div class="card integration-card">
+            <h2>Works With Your Favorite Tools</h2>
+            <p>
+                Use Klaviyo, Mailchimp, Attentive or any other ESP? No worries! Wishlist easily integrates with your ESP! Use Wishlist to send emails through your ESP, no extra fee!
+            </p>
+        </div>
+        <!-- END OF NEW SECTION -->
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const simulateBtn = document.getElementById('simulateBtn');
+            const storeUrlInput = document.getElementById('storeUrl');
+            const statusDiv = document.getElementById('status');
+            const festivalsTableBody = document.querySelector('#festivals-table tbody');
+
+            simulateBtn.addEventListener('click', async function() {
+                const storeUrl = storeUrlInput.value;
+                if (!storeUrl || !storeUrl.includes('.')) {
+                    alert('Please enter a valid store URL.');
+                    return;
+                }
+
+                // --- 1. SET UI TO LOADING STATE ---
+                simulateBtn.disabled = true;
+                simulateBtn.textContent = 'Simulating...';
+                statusDiv.textContent = 'Analyzing store and generating copy... This may take a moment.';
+                statusDiv.style.display = 'block';
+                statusDiv.style.color = 'var(--text-light)';
+                
+                // Reset previous results
+                document.querySelectorAll('td[id^="template-"] p').forEach(p => p.style.display = 'block');
+                document.querySelectorAll('.checklist-table pre').forEach(pre => pre.remove());
+                festivalsTableBody.innerHTML = '<tr><td colspan="2" class="placeholder-text">Loading festive seasons...</td></tr>';
+
+                try {
+                    // --- 2. CALL YOUR NODE.JS BACKEND ---
+                    const response = await fetch('/simulate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ storeUrl: storeUrl }),
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data.error || `Server responded with status: ${response.status}`);
+                    }
+
+                    // --- 3. POPULATE THE UI WITH DATA FROM BACKEND ---
+                    festivalsTableBody.innerHTML = ''; // Clear loading text
+                    data.top_festivals.forEach(festival => {
+                        const row = festivalsTableBody.insertRow();
+                        const nameCell = row.insertCell(0);
+                        const dateCell = row.insertCell(1);
+                        nameCell.textContent = festival.name;
+                        dateCell.textContent = festival.date;
+                        dateCell.style.color = 'var(--text-color)'; // Override default light text
+                    });
+                    
+                    function populateTemplate(id, content) {
+                        const cell = document.getElementById(id);
+                        if (cell && content) {
+                            cell.innerHTML = ''; // Clear placeholder
+                            const pre = document.createElement('pre');
+                            pre.textContent = content;
+                            cell.appendChild(pre);
+                        } else {
+                           cell.innerHTML = '<p class="placeholder-text">Template not generated.</p>';
+                        }
+                    }
+
+                    populateTemplate('template-reminder', data.email_templates.reminder);
+                    populateTemplate('template-abandoned', data.email_templates.abandoned);
+                    populateTemplate('template-price-drop', data.email_templates.price_drop);
+                    populateTemplate('template-back-in-stock', data.email_templates.back_in_stock);
+                    populateTemplate('template-low-stock', data.email_templates.low_stock);
+                    populateTemplate('template-campaign', data.email_templates.campaign);
+                    
+                    statusDiv.textContent = `Simulation complete for ${data.base_country || 'your store'}!`;
+                    statusDiv.style.color = 'var(--success-color)';
+
+                } catch (error) {
+                    console.error('Simulation failed:', error);
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.style.color = 'var(--error-color)';
+                } finally {
+                    // --- 4. RESET UI FROM LOADING STATE ---
+                    simulateBtn.disabled = false;
+                    simulateBtn.textContent = 'Simulate for My Store';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

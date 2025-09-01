@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Stock Alert</title>
+    <style>
+        body {
+            background: #f5f4f3;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 24px auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 32px 32px 24px 32px;
+        }
+        .header {
+            margin-bottom: 24px;
+        }
+        .email-info {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+        .banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .banner-img {
+            width: 180px;
+            height: 120px;
+            background: linear-gradient(90deg, #e07a2a 0%, #e07a2a 100%);
+            border-radius: 16px;
+            margin: 0 24px;
+        }
+        .main-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .product-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            background: #f7f7f7;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        .product-img {
+            width: 260px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .product-details {
+            flex: 1;
+        }
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .product-meta {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .product-desc {
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+        .low-stock-warning {
+            color: #e07a2a;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+        .cta-btn {
+            background: #e07a2a;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .cta-btn:hover {
+            background: #c96a1e;
+        }
+        .footer-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+        .footer-btn {
+            background: #f5f4f3;
+            color: #222;
+            border: none;
+            border-radius: 16px;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .footer-btn:hover {
+            background: #ececec;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="email-info">To: {{to_email}}</div>
+            <div class="email-info">From: {{from_email}}</div>
+        </div>
+        <div class="banner">
+            <div class="banner-img"></div>
+            <div style="flex:1;"></div>
+            <div class="banner-img"></div>
+        </div>
+        <div class="main-title">{{lowStock_headline}}</div>
+        <div class="product-section">
+            <img class="product-img" src="{{product_image}}" alt="Product Image">
+            <div class="product-details">
+                <div class="product-title">{{product_name}}</div>
+                <div class="product-meta">{{lowStock_metaPrefix}} - {{lowStock_metaPrice}}: ${{product_price}}</div>
+                <div class="low-stock-warning">{{lowStock_warning}}</div>
+                <div class="product-desc">{{lowStock_description}}</div>
+                <a href="{{product_link}}"><button class="cta-btn">{{lowStock_buyNowButton}}</button></a>
+            </div>
+        </div>
+        <div class="footer-btns">
+            <button class="footer-btn">{{lowStock_replyButton}}</button>
+            <button class="footer-btn">{{lowStock_forwardButton}}</button>
+        </div>
+    </div>
+</body>
+</html>

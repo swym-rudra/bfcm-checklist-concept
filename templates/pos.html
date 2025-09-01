@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopify POS terminal in the store</title>
+    <style>
+    @page {
+  size: 210mm 240mm;
+  margin: 5mm; /* Keep some breathing room */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Display", "SF Pro Text", Helvetica, Arial, sans-serif;
+  background-color: #202122;
+  color: #fafafa;;
+  border-radius: 12px;
+}
+
+.page-wrapper {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  align-items: flex-start; /* or center if you prefer vertical centering */
+  justify-content: center;
+}
+
+.scaled-content {
+  transform-origin: top left;
+  transform: scale(0.8); /* Adjust scale as needed */
+}
+
+.container {
+
+  max-width: 200mm; /* Uses more of your 210mm page */
+  margin: 0 auto;
+  padding: 5px;
+}
+
+header {
+  /* Remove position: fixed to avoid overflow issues */
+  background-color: #202122;
+  margin-bottom: 10px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  border-bottom: 1px solid #313335;
+}
+.back-button {
+  height: 100%;
+  width: auto;
+}
+.logo {
+  height: 60%;
+  width: auto;
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.app-banner {
+  display: flex;
+  align-items: center;
+  padding: 9px 0;
+  background-color: #202122;
+  margin-top: 6px;
+}
+
+.app-icon {
+  width: 24px;         /* adjust to your desired size */
+  height: 24px;
+  background-image: url('https://cdn.prod.website-files.com/67a1ca5bb1b9dbe1837f156e/67df7b98f2a300c8b410afb1_appIcon_SwymWishlistPlus-p-500.webp');
+  background-size: contain;  /* or cover */
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4px;  /* optional: keeps it rounded */
+}
+
+
+.app-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #b6b9bc;
+}
+
+.user-info {
+  padding: 6px 0;
+}
+
+.user-name {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.user-contact {
+  font-size: 18px;
+  color: #c6cdd1;
+}
+
+.edit-preferences {
+  font-size: 22px;
+  color: #38a5ff;
+  text-decoration: none;
+  margin-left: 12px;
+}
+
+.section {
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #989fa4;
+}
+
+.view-all {
+  font-size: 18px;
+  color: #38a5ff;
+  text-decoration: none;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  page-break-inside: avoid;
+}
+
+.product-card {
+  aspect-ratio: 1 / 1; 
+  border: 1px solid #7a8895;
+  border-radius: 12px;
+  padding: 12px;
+}
+.product-image-wrapper {
+  width: 90%;
+  height: 100%;  /* 👈 adjust to fit your card height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 13px;
+  border-radius: 12px;
+}
+
+.product-name {
+  font-size: 18px;
+  color: #989fa4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+    </style>
+
+    
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="top-bar">
+          <img src="https://cdn.prod.website-files.com/67a1ca5bb1b9dbe1837f156e/67a9a8f383140e7b2babbf71_logo-swym.svg" alt="Back" class="back-button" class="logo"/>
+          <h1 class="page-title">{{pos_pageTitle}}</h1>
+        </div>
+        <div class="app-banner">
+          <div class="app-icon"></div>
+          <span class="app-name">{{app_name}}</span>
+        </div>
+      </div>
+    </header>
+    <main class="container">
+      <section class="user-info">
+        <h2 class="user-name">
+          John Doe <a href="{{edit_preferences_url}}" class="edit-preferences">{{pos_editPreferences}}</a>
+        </h2>
+        <p class="user-contact">john_doe@example.com | +44 9865904321</p>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">{{pos_wishlistHeader}}</h2>
+          <a href="{{wishlist_view_all_url}}" class="view-all">{{pos_viewAll}}</a>
+        </div>
+        <div class="product-grid">
+          {{#wishlists}}
+          {{/wishlists}}
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">{{pos_backInStockHeader}}</h2>
+          <a href="{{bis_view_all_url}}" class="view-all">{{pos_viewAll}}</a>
+        </div>
+        <div class="product-grid">
+          {{#back_in_stock}}
+          {{/back_in_stock}}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

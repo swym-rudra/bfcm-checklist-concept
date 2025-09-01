@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Season Readiness Checklist</title>
+    <style>
+        /* --- Google Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #4F46E5;
+            --primary-hover: #4338CA;
+            --text-color: #374151;
+            --text-light: #6B7280;
+            --border-color: #E5E7EB;
+            --background-light: #F9FAFB;
+            --background-white: #FFFFFF;
+            --success-color: #10B981;
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-light);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Main Container & Card Layout --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--background-white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        /* --- Form & Input Elements --- */
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .input-group input[type="text"] {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- Checklist Table Styling --- */
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+        }
+
+        .checklist-table td {
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        
+        .checklist-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist-table td:first-child {
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .checklist-table td:nth-child(2) {
+            color: var(--text-light);
+        }
+        
+        /* Specific styles for the 3-column table */
+        .seasons-table td:nth-child(2) {
+             font-style: italic;
+             color: var(--text-color);
+        }
+        
+        .placeholder-text {
+            color: #9CA3AF;
+            font-style: italic;
+        }
+        
+        .btn-simulate {
+            font-weight: 500;
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: none;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+        }
+        
+        .btn-simulate:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+        
+        /* Styling for the injected email template blocks */
+        .checklist-table pre {
+            background-color: var(--background-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Your Season Readiness Checklist!</h1>
+
+        <div class="card">
+            <div class="input-group">
+                <input type="text" id="storeUrl" placeholder="Enter your store URL (e.g., mystore.com)">
+                <button class="btn btn-primary" id="simulateBtn">Simulate for My Store</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Wishlist Basics</h2>
+            <table class="checklist-table">
+                <tbody>
+                    <tr>
+                        <td>Collections</td>
+                        <td>Engage 30% incrementally more users</td>
+                    </tr>
+                    <tr>
+                        <td>SmartSave</td>
+                        <td>Engage 75% incrementally more users</td>
+                    </tr>
+                    <tr>
+                        <td>Save For Later</td>
+                        <td>Save 80% of cart deletes into wishlists, convert them later</td>
+                    </tr>
+                    <tr>
+                        <td>Generate Sign Ups with consent</td>
+                        <td>Generate signups for your newsletter and more!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Festive Seasons <small class="placeholder-text">(Click "Simulate" above)</small></h2>
+            <table class="checklist-table seasons-table">
+                <tbody>
+                    <tr>
+                        <td>Season 1</td>
+                        <td id="date-range-1" class="placeholder-text">Date range</td>
+                        <td><button class="btn-simulate" onclick="alert('Please click the main \\'Simulate for My Store\\' button first.')">Simulate</button></td>
+                    </tr>
+                    <tr>
+                        <td>Season 2</td>
+                        <td id="date-range-2" class="placeholder-text">Date range</td>
+                        <td><button class="btn-simulate" onclick="alert('Please click the main \\'Simulate for My Store\\' button first.')">Simulate</button></td>
+                    </tr>
+                    <tr>
+                        <td>Season 3</td>
+                        <td id="date-range-3" class="placeholder-text">Date range</td>
+                        <td><button class="btn-simulate" onclick="alert('Please click the main \\'Simulate for My Store\\' button first.')">Simulate</button></td>
+                    </tr>
+                    <tr>
+                        <td>Season 4</td>
+                        <td id="date-range-4" class="placeholder-text">Date range</td>
+                        <td><button class="btn-simulate" onclick="alert('Please click the main \\'Simulate for My Store\\' button first.')">Simulate</button></td>
+                    </tr>
+                     <tr>
+                        <td>Season 5</td>
+                        <td id="date-range-5" class="placeholder-text">Date range</td>
+                        <td><button class="btn-simulate" onclick="alert('Please click the main \\'Simulate for My Store\\' button first.')">Simulate</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Marketing with Wishlist</h2>
+            <table class="checklist-table">
+                 <tbody>
+                    <tr>
+                        <td>Send Wishlist Reminders</td>
+                        <td id="template-reminder"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send reminders for cart abandoned items</td>
+                        <td id="template-abandoned"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts for price drop</td>
+                        <td id="template-price-drop"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts when a product is back in stock</td>
+                        <td id="template-back-in-stock"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                    <tr>
+                        <td>Send alerts when a product is low in stock</td>
+                        <td id="template-low-stock"><p class="placeholder-text">Simulated email copy will appear here.</p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Use Wishlist Like The Professionals</h2>
+            <table class="checklist-table">
+                 <tbody>
+                    <tr>
+                        <td>Run a "Win Your Wishlist" campaign</td>
+                        <td id="template-campaign"><p class="placeholder-text">Simulated campaign copy will appear here.</p></td>
+                    </tr>
+                 </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const simulateBtn = document.getElementById('simulateBtn');
+            const storeUrlInput = document.getElementById('storeUrl');
+
+            // --- ALL SIMULATION LOGIC IS TRIGGERED HERE ---
+            simulateBtn.addEventListener('click', function() {
+                const storeUrl = storeUrlInput.value;
+                if (!storeUrl || !storeUrl.includes('.')) {
+                    alert('Please enter a valid store URL to begin simulation.');
+                    return;
+                }
+
+                // --- 1. SIMULATE SEASONAL DATA ---
+                const seasons = [
+                    { name: 'Diwali Sale', range: 'Oct 20, 2025 - Nov 2, 2025' },
+                    { name: 'Christmas & New Year', range: 'Dec 22, 2025 - Jan 5, 2026' },
+                    { name: 'Republic Day Sale', range: 'Jan 20, 2026 - Jan 26, 2026' },
+                    { name: 'Holi Festival Sale', range: 'Mar 10, 2026 - Mar 15, 2026' },
+                    { name: 'Independence Day Sale', range: 'Aug 8, 2026 - Aug 15, 2026' }
+                ];
+                
+                seasons.forEach((season, index) => {
+                    const seasonCell = document.querySelector(`#date-range-${index + 1}`).previousElementSibling;
+                    const dateCell = document.getElementById(`date-range-${index + 1}`);
+                    
+                    seasonCell.textContent = season.name;
+                    dateCell.textContent = season.range;
+                    dateCell.classList.remove('placeholder-text');
+                });
+                
+                document.querySelectorAll('.seasons-table .btn-simulate').forEach(btn => {
+                    btn.textContent = 'View Evolution';
+                    btn.onclick = () => alert(`Simulating marketing evolution for ${storeUrl} during this period.`);
+                });
+                
+                // --- 2. SIMULATE AND INJECT EMAIL TEMPLATES ---
+                const templates = {
+                    reminder: `Subject: Still thinking about it? Your wishlist is waiting!
+
+Hi [Customer Name],
+
+Great choices! You've saved some wonderful items to your wishlist at ${storeUrl}.
+
+Don't let them get away! Your favorites are just a click away from being yours.
+
+<View My Wishlist> (Button)`,
+                    abandoned: `Subject: Your cart at ${storeUrl} is about to expire!
+
+Hi [Customer Name],
+
+Looks like you left some great items in your cart. We've saved them for you, but they won't last forever!
+
+Complete your order now before they go out of stock.
+
+<Complete My Order> (Button)`,
+                    'price-drop': `Subject: Good news! An item on your wishlist is now on sale!
+
+Hi [Customer Name],
+
+You've got great taste! The price just dropped on an item you love.
+
+Product Name
+Was: $OldPrice
+Now: $NewPrice!
+
+This is the perfect time to grab it.
+<Shop Now> (Button)`,
+                    'back-in-stock': `Subject: Great news! The item you wanted is back in stock.
+
+Hi [Customer Name],
+
+You asked to be notified, and we're happy to let you know that [Product Name] is back in stock at ${storeUrl}!
+
+It's a popular item, so it might sell out again fast. Get it before it's gone!
+
+<Buy It Now> (Button)`,
+                    'low-stock': `Subject: Act fast! An item on your wishlist is almost sold out.
+
+Hi [Customer Name],
+
+Don't miss out! We're running low on [Product Name], an item you've wishlisted.
+
+There are only a few left in stock. Grab yours now before someone else does!
+
+<Secure Yours Now> (Button)`,
+                    campaign: `Subject: Create your dream wishlist for a chance to WIN it!
+
+Hi Shopper,
+
+The festive season is here, and we're making dreams come true at ${storeUrl}!
+
+How to Enter:
+1. Log in to your account.
+2. Add at least 5 items to your wishlist by [End Date].
+3. That's it! You're automatically entered to win your entire wishlist for FREE (up to $500 value).
+
+<Start Wishlisting> (Button)`
+                };
+                
+                function populateTemplate(id, content) {
+                    const cell = document.getElementById(id);
+                    if (cell) {
+                        cell.innerHTML = ''; // Clear the placeholder text
+                        const pre = document.createElement('pre');
+                        pre.textContent = content;
+                        cell.appendChild(pre);
+                    }
+                }
+
+                populateTemplate('template-reminder', templates.reminder);
+                populateTemplate('template-abandoned', templates.abandoned);
+                populateTemplate('template-price-drop', templates['price-drop']);
+                populateTemplate('template-back-in-stock', templates['back-in-stock']);
+                populateTemplate('template-low-stock', templates['low-stock']);
+                populateTemplate('template-campaign', templates.campaign);
+
+                alert(`Success! Season dates and email templates for ${storeUrl} have been simulated.`);
+            });
+        });
+    </script>
+
+</body>
+</html>

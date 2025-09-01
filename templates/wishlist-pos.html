@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlists</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .time-date {
+            font-weight: 600;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            width: 80px;
+            background: #2a2a2a;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .sidebar-icon {
+            width: 24px;
+            height: 24px;
+            background: #444;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+        }
+        
+        .sidebar-icon.badge {
+            position: relative;
+        }
+        
+        .sidebar-icon.badge::after {
+            content: '2';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #007AFF;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-top: 44px;
+            background: #1a1a1a;
+            border-radius: 20px 0 0 0;
+            overflow: hidden;
+        }
+        
+        .wishlist-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .back-arrow {
+            width: 24px;
+            height: 24px;
+            background: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            background: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wishlist-plus-section {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .wishlist-plus-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .heart-icon {
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+        }
+        
+        .wishlist-plus-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .wishlisted-items {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .create-new-link {
+            color: #007AFF;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .wishlist-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .tab {
+            padding: 8px 16px;
+            background: #333;
+            border-radius: 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            background: #007AFF;
+        }
+        
+        .item-count-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .item-count {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .action-btn {
+            color: #007AFF;
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .wishlist-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px;
+        }
+        
+        .wishlist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .item-image {
+            width: 60px;
+            height: 60px;
+            background: #444;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .item-variant {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        
+        .item-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #007AFF;
+        }
+        
+        .item-status {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        
+        .status-tag {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-tag.purchased {
+            background: #34c759;
+            color: white;
+        }
+        
+        .status-tag.out-of-stock {
+            background: #ff3b30;
+            color: white;
+        }
+        
+        .item-arrow {
+            width: 20px;
+            height: 20px;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        .add-products-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 100px;
+            right: 20px;
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 34px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="time-date">9:41 Thu Oct 26</div>
+            <div class="status-icons">
+                <span>📶</span>
+            </div>
+        </div>
+        
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-icon">⚓</div>
+            <div class="sidebar-icon">🔍</div>
+            <div class="sidebar-icon">🏠</div>
+            <div class="sidebar-icon badge">🛍️</div>
+            <div class="sidebar-icon">🏷️</div>
+            <div class="sidebar-icon">👤</div>
+            <div class="sidebar-icon">⋯</div>
+            <div class="sidebar-icon">📦</div>
+            <div class="sidebar-icon">❤️</div>
+            <div class="sidebar-icon">🏢</div>
+            <div class="sidebar-icon">📶</div>
+            <div class="sidebar-icon">🔒</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Wishlist Header -->
+            <div class="wishlist-header">
+                <div class="header-left">
+                    <div class="back-arrow">←</div>
+                    <div class="header-title">Wishlists</div>
+                </div>
+                <div class="header-actions">
+                    <div class="action-icon">⋯</div>
+                    <div class="action-icon">🗑️</div>
+                </div>
+            </div>
+            
+            <!-- Wishlist Plus Section -->
+            <div class="wishlist-plus-section">
+                <div class="wishlist-plus-header">
+                    <div class="heart-icon"></div>
+                    <div class="wishlist-plus-title">Wishlist Plus</div>
+                </div>
+                <div class="wishlisted-items">Wishlisted items</div>
+                <a href="#" class="create-new-link">Create new list</a>
+                
+                <!-- Tabs -->
+                <div class="wishlist-tabs">
+                    <div class="tab active">Wishlist 1</div>
+                    <div class="tab">Wishlist 2</div>
+                </div>
+                
+                <!-- Item Count & Actions -->
+                <div class="item-count-actions">
+                    <div class="item-count">8 items</div>
+                    <div class="action-buttons">
+                        <button class="action-btn">Notes</button>
+                        <button class="action-btn">Share</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wishlist Items -->
+            <div class="wishlist-items">
+                <div class="wishlist-item">
+                    <img src="{{product_image_1}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_1}}</div>
+                        <div class="item-variant">{{variant_name_1}}</div>
+                        <div class="item-price">${{product_price_1}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_2}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_2}}</div>
+                        <div class="item-variant">{{variant_name_2}}</div>
+                        <div class="item-price">${{product_price_2}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_3}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_3}}</div>
+                        <div class="item-variant">{{variant_name_3}}</div>
+                        <div class="item-price">${{product_price_3}}</div>
+                        <div class="item-status">
+                            <span class="status-tag purchased">Purchased Jun 6</span>
+                            <span class="status-tag out-of-stock">Out of stock</span>
+                        </div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_4}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_4}}</div>
+                        <div class="item-variant">{{variant_name_4}}</div>
+                        <div class="item-price">${{product_price_4}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_5}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_5}}</div>
+                        <div class="item-variant">{{variant_name_5}}</div>
+                        <div class="item-price">${{product_price_5}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_6}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_6}}</div>
+                        <div class="item-variant">{{variant_name_6}}</div>
+                        <div class="item-price">${{product_price_6}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_7}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_7}}</div>
+                        <div class="item-variant">{{variant_name_7}}</div>
+                        <div class="item-price">${{product_price_7}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+                
+                <div class="wishlist-item">
+                    <img src="{{product_image_8}}" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">{{product_name_8}}</div>
+                        <div class="item-variant">{{variant_name_8}}</div>
+                        <div class="item-price">${{product_price_8}}</div>
+                    </div>
+                    <div class="item-arrow">></div>
+                </div>
+            </div>
+            
+            <!-- Add Products Button -->
+            <button class="add-products-btn">Add Products</button>
+        </div>
+    </div>
+    
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        $0.00
+    </div>
+</body>
+</html> 
